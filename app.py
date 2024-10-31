@@ -37,7 +37,7 @@ import pickle
 import cv2
 import numpy as np
 from fastai.vision.all import *
-from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import load_model
 import base64
 from pathlib import Path
 import pathlib
@@ -50,16 +50,16 @@ temp = pathlib.PosixPath
 # modelpath = os.path.join(path, 'fruit_classifier.pkl')
 # emotion_modelpath = os.path.join(path, 'emotion_model.h5')  # Path for the emotion detection model
 modelpath = Path('fruit_classifier.pkl')
-emotion_modelpath = Path('emotion_model.h5')
+# emotion_modelpath = Path('emotion_model.h5')
 model = load_learner(modelpath)
 
-emotion_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+# emotion_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+# face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 
-emotion_model = load_model('emotion_model.h5')
+# emotion_model = load_model('emotion_model.h5')
 
-print(type(emotion_model))    
+# print(type(emotion_model))    
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -96,31 +96,31 @@ def show_prediction():
 
 
 
-@app.route('/emotion-detect')
-def emotion_detect():
-    return render_template('emotion_detect.html')
+# @app.route('/emotion-detect')
+# def emotion_detect():
+#     return render_template('emotion_detect.html')
 
-def predict_emotion(frame):
-    # Preprocess the frame for emotion detection
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
+# def predict_emotion(frame):
+#     # Preprocess the frame for emotion detection
+#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
 
-    results = []
-    for (x, y, w, h) in faces:
-        face_roi = gray[y:y+h, x:x+w]
-        face_roi = cv2.resize(face_roi, (48, 48))  # Resize to model input size
-        face_roi = face_roi / 255.0  # Normalize to [0, 1]
-        face_roi = face_roi.reshape(1, 48, 48, 1)  # Reshape for model input
+#     results = []
+#     for (x, y, w, h) in faces:
+#         face_roi = gray[y:y+h, x:x+w]
+#         face_roi = cv2.resize(face_roi, (48, 48))  # Resize to model input size
+#         face_roi = face_roi / 255.0  # Normalize to [0, 1]
+#         face_roi = face_roi.reshape(1, 48, 48, 1)  # Reshape for model input
 
-        # Make prediction
-        prediction = emotion_model.predict(face_roi)
-        emotion_index = np.argmax(prediction)  # Get the index of the highest probability
-        emotion_label = emotion_labels[emotion_index]  # Map index to emotion label
+#         # Make prediction
+#         prediction = emotion_model.predict(face_roi)
+#         emotion_index = np.argmax(prediction)  # Get the index of the highest probability
+#         emotion_label = emotion_labels[emotion_index]  # Map index to emotion label
 
-        # Store the results
-        results.append({"label": emotion_label, "coordinates": (x, y, w, h)})
+#         # Store the results
+#         results.append({"label": emotion_label, "coordinates": (x, y, w, h)})
 
-    return results
+#     return results
 
 # @app.route('/capture')
 # def capture():
@@ -158,56 +158,56 @@ def predict_emotion(frame):
 #     cv2.destroyAllWindows()
 #     return jsonify({"status": "capturing stopped"})
 
-@app.route('/capture')
-def capture():
-    # Start capturing video from the webcam
-    cap = cv2.VideoCapture(0)
-    frame_count = 0
-    results_data = []  # List to store results for each frame
+# @app.route('/capture')
+# def capture():
+#     # Start capturing video from the webcam
+#     cap = cv2.VideoCapture(0)
+#     frame_count = 0
+#     results_data = []  # List to store results for each frame
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
+#     while True:
+#         ret, frame = cap.read()
+#         if not ret:
+#             break
 
-        # Predict emotions in the current frame
-        results = predict_emotion(frame)
+#         # Predict emotions in the current frame
+#         results = predict_emotion(frame)
 
-        # Convert results to JSON-serializable format
-        serializable_results = []
-        for detection in results:
-            # Ensure that all elements are JSON serializable
-            serializable_detection = {
-                "label": detection["label"],
-                "coordinates": [int(coord) for coord in detection["coordinates"]]  # Convert to int
-            }
-            serializable_results.append(serializable_detection)
+#         # Convert results to JSON-serializable format
+#         serializable_results = []
+#         for detection in results:
+#             # Ensure that all elements are JSON serializable
+#             serializable_detection = {
+#                 "label": detection["label"],
+#                 "coordinates": [int(coord) for coord in detection["coordinates"]]  # Convert to int
+#             }
+#             serializable_results.append(serializable_detection)
 
-        results_data.append(serializable_results)  # Store results for the current frame
+#         results_data.append(serializable_results)  # Store results for the current frame
 
-        # Draw results on the frame
-        for detection in serializable_results:
-            label = detection["label"]
-            x, y, w, h = detection["coordinates"]
+#         # Draw results on the frame
+#         for detection in serializable_results:
+#             label = detection["label"]
+#             x, y, w, h = detection["coordinates"]
 
-            # Draw rectangle around detected face and label
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.putText(frame, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+#             # Draw rectangle around detected face and label
+#             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+#             cv2.putText(frame, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
-        # Display the frame with detected emotions
-        cv2.imshow('Emotion Detection', frame)
+#         # Display the frame with detected emotions
+#         cv2.imshow('Emotion Detection', frame)
 
-        # Exit loop on pressing 'q'
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+#         # Exit loop on pressing 'q'
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
 
-        frame_count += 1
+#         frame_count += 1
 
-    cap.release()
-    cv2.destroyAllWindows()
+#     cap.release()
+#     cv2.destroyAllWindows()
 
-    # Return the captured results as JSON
-    return jsonify({"status": "capturing stopped", "results": results_data[-1]})
+#     # Return the captured results as JSON
+#     return jsonify({"status": "capturing stopped", "results": results_data[-1]})
 
 
 @app.route("/motion_detection")
@@ -226,6 +226,12 @@ def yolo():
 def fr():
       return render_template("face-recognition.html")
 
+
+
+
+@app.route("/emotion-detect")
+def detec():
+      return render_template("emotion_detect.html")
 
 
 

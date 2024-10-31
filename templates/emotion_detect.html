@@ -68,7 +68,7 @@
 </body>
 </html> -->
 
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,5 +196,111 @@
     } }
     </script>
     
+</body> -->
+<!-- </html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection from Faces</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Video container */
+        .video-container {
+            max-width: 720px;
+            width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Description section */
+        .description {
+            max-width: 720px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .description h2 {
+            color: #007acc;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+
+        .description p {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #007acc;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .description {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Emotion Detection from Faces</h1>
+    <div class="video-container">
+        <video controls>
+            <source src="{{ url_for('static', filename='emotion.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="description">
+        <h2>About the Emotion Detection Model</h2>
+        <p>The video above demonstrates a <span class="highlight">facial emotion detection model</span> designed to analyze and identify emotions from facial expressions in real-time. This model employs advanced computer vision and deep learning techniques to recognize various emotions based on facial features and movements.</p>
+        <p>By processing frames captured by a camera, the model can detect emotions such as happiness, sadness, anger, surprise, and more. It uses a trained neural network to interpret facial landmarks and expressions, allowing for accurate emotion classification.</p>
+        <p>This technology is applicable in various fields, including <span class="highlight">mental health assessment, customer feedback analysis, and interactive user experiences</span>. By understanding emotions, systems can adapt responses to enhance user engagement and well-being.</p>
+    </div>
 </body>
 </html>
