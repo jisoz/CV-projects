@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Command to run your application using Gunicorn
-CMD ["gunicorn", "app:app"]
+CMD ["gunicorn", "-w", "1", "--threads", "1", "app:app"]
