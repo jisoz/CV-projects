@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance System</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Headings styling */
+        h1, h2, h3 {
+            color: #4a4a8c;
+            margin-top: 0;
+        }
+
+        h1 {
+            border-bottom: 2px solid #666;
+            padding-bottom: 10px;
+        }
+
+        /* Container styling */
+        .content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* Image styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sample images grid */
+        .sample-images {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .sample-images img {
+            width: 48%; /* Adjusts for two images per row */
+            margin-bottom: 10px;
+        }
+
+        /* Table styling */
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .attendance-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Form and button styling */
+        input[type="date"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4a4a8c;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #363670;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>Face Recognition Attendance System</h1>
+    <img src="{{ url_for('static', filename='sys.png') }}" alt="System Image">
+
+    <h2>Overview</h2>
+    <p>The Face Recognition Attendance System is an innovative solution designed to automate the attendance tracking process for educational institutions and workplaces. Utilizing advanced facial recognition technology, the system identifies and verifies the presence of teachers and employees in real time.</p>
+    <img src="{{ url_for('static', filename='diagram.png') }}" alt="System Diagram">
+    
+    <p>In a real-world application, a video camera records in the background (classroom, workplace, etc.) while the system performs recognition. For demonstration purposes, we used a webcam.</p>
+
+    <p>1. This face recognition system is designed for teachers and employees. As a student, the system did not recognize me, displaying "unknown" instead.</p>
+    <img src="{{ url_for('static', filename='unknown.jpg') }}" alt="Unknown Recognition">
+
+    <h2>Example Attendance Entries</h2>
+    <p>Initially, Professor Fahed Abdallah entered:</p>
+    <img src="{{ url_for('static', filename='fa.png') }}" alt="Fahed Abdallah Entry">
+    <p>Fahed Abdallah was recognized by the system at <strong>17:03 PM</strong>.</p>
+
+    <p>Next, Bilal Hussein entered:</p>
+    <img src="{{ url_for('static', filename='bh.png') }}" alt="Bilal Hussein Entry">
+    <p>Bilal Hussein was recognized by the system at <strong>17:04 PM</strong>.</p>
+
+    <h3>Database Update</h3>
+    <p>In the background, both teachers were automatically inserted into the "attendance" table with their names, images, date, and time of presence.</p>
+    <p>By default, in the "professors" table, the total attendance increases by 1 and the last attendance date updates to <strong>2023-06-11</strong>.</p>
+    <img src="{{ url_for('static', filename='db1.png') }}" alt="Database Entry">
+
+    <h2>Subsequent Entries</h2>
+    <p>Fahed Abdallah entered again on <strong>2023-06-25 at 10:12:54</strong>.</p>
+    <img src="{{ url_for('static', filename='db2.png') }}" alt="Subsequent Database Entry">
+    <p>The total attendance is now <strong>5</strong> and the last attendance is updated to <strong>2023-06-25</strong>.</p>
+    <p>George Lebbos and Hussein Jardali entered at <strong>10:13:01</strong> and <strong>10:13:11</strong>, respectively.</p>
+
+    <h2>Home Part</h2>
+    <p>There is a date-type form when clicked:</p>
+    <img src="{{ url_for('static', filename='form.png') }}" alt="Date Form">
+    <p>This allows us to view the attendance of professors by date. The administrator can view all records from this form. For instance, if they want to see attendance on <strong>2023-06-25</strong>, they can specify the date and click to submit.</p>
+    <p>It will directly redirect to the "process-form" section where the list of professors is displayed.</p>
+    <img src="{{ url_for('static', filename='ee.png') }}" alt="Processed Form"> 
+
+    <h3>Missing Employee Link:</h3>
+    <p>You can see all employees who are absent from work on that day. A report for all absent employees can be created by pressing a button, which saves them in the report table in the database.</p>
+    <div class="button">Make Report</div>
+    <img src="{{ url_for('static', filename='report.png') }}" alt="Report Image">
+    <p>You can now view all information about absent teachers through this link</p>
+    <img src="{{ url_for('static', filename='pp.png') }}" alt="Absent Teachers Info">
+
+    <h3>Add Employee Link:</h3>
+    <p>This link allows us to add a new teacher to our system. It includes a form where we can simply add the information</p>
+    <img src="{{ url_for('static', filename='add.png') }}" alt="Add Form">
+
+    <h2>Testing Webcam for the New Professor</h2>
+    <img src="{{ url_for('static', filename='testwebcam.jpg') }}" alt="Webcam Testing">
+
+
+    <h2>Conclusion</h2>
+    <p>The Face Recognition Attendance System demonstrates a modern, efficient approach to tracking attendance in educational and workplace environments. By leveraging facial recognition technology, this system automates the process, significantly reducing manual effort and the potential for human error. Through real-time identification and record-keeping, it ensures accurate attendance monitoring, enhances security, and enables a seamless experience for both administrators and users.</p>
+
+    <p>Moreover, the system’s backend database integration provides robust data management, allowing for real-time updates and easy access to attendance records. Additional functionalities, such as the ability to generate absence reports and add new employees, further increase the system's utility and adaptability.</p>
+
+    <p>In summary, this project is a powerful application of artificial intelligence in everyday administrative tasks, setting a foundation for more advanced attendance solutions and proving the potential of AI-driven automation in streamlining routine processes.</p>
+
+</div>
+
+</body>
+</html>

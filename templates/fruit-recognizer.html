@@ -1,0 +1,68 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Fruit Classifier</title>
+</head>
+<body>
+    <h1 align="center">{{ title.tname }}</h1>
+    <h2>Select a fruit to classify</h2>
+    <form action="/prediction/" method="post" enctype="multipart/form-data">
+        <label for="image_field">Please choose an image</label>
+        <input type="file" id="image_field" name="file" accept="image/*" required onchange="getfile()"/>
+        <button type="submit">Predict</button>
+    </form>
+
+    <script>
+        function getfile() {
+            const listfile = document.getElementById("image_field").files;
+            const im = document.createElement("img");
+            im.setAttribute("id", "imge");
+            im.setAttribute("style", "width:100px");
+            document.body.appendChild(im);   
+            document.getElementById("imge").src = URL.createObjectURL(listfile[0]);
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Fruit Classifier</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title.tname }}</h1>
+        <h2>Select a fruit to classify</h2>
+        <p class="info-message">"Please note: This classifier is trained specifically to recognize only lemons, oranges, bananas, and apples. If you upload images of other fruits or non-fruit items, the predictions may not be accurate. Thank you for your understanding!"</p>
+        <form action="/prediction/" method="post" enctype="multipart/form-data">
+            <label for="image_field">Please choose an image</label>
+            <input type="file" id="image_field" name="file" accept="image/*" required onchange="getfile()"/>
+            <button type="submit">Predict</button>
+        </form>
+        <img id="imge" /> <!-- Hide initially, will be shown by JS -->
+    </div>
+
+    <script>
+        function getfile() {
+            const listfile = document.getElementById("image_field").files;
+            const im = document.getElementById("imge");
+            im.style.display = "block"; // Show image preview
+            im.src = URL.createObjectURL(listfile[0]);
+            im.style.maxWidth = "600px"; // Set max width for the image
+            im.style.width = "100%"; // Ensure image is responsive
+        }
+    </script>
+</body>
+</html>

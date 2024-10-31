@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detection Using YOLOv5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #666;
+            padding-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        .content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .sample-images {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .sample-images img {
+            width: 48%; /* Adjust as needed */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>Car Detection Using YOLOv5</h1>
+
+    <h2>In this project, I have utilized the YOLOv5 model from Ultralytics to detect cars on the road.</h2>
+
+    <h3>Sample Data</h3>
+    <p>Here is how our input data looks:</p>
+    <img src="{{ url_for('static', filename='ultralytrics1.png') }}" alt="Input Image">
+
+ 
+
+    <h3>Detection Results</h3>
+    <p>After processing the images through the YOLOv5 model, the detection results are as follows:</p>
+    <div class="sample-images">
+        <img src="{{ url_for('static', filename='ultra2.png') }}" alt="Detection Result 1">
+    </div>
+
+    <h3>Performance Overview</h3>
+    <p>YOLOv5 offers high accuracy and real-time performance in detecting cars on the road, making it suitable for applications in autonomous driving and traffic monitoring.</p>
+
+    <h3>Conclusion</h3>
+    <p>The YOLOv5 model proves to be effective in detecting vehicles in various environments, providing valuable insights for future developments in the field of computer vision.</p>
+</div>
+
+</body>
+</html>

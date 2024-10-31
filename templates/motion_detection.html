@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Detection Video</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Video container */
+        .video-container {
+            max-width: 720px;
+            width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Description section */
+        .description {
+            max-width: 720px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .description h2 {
+            color: #007acc;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+
+        .description p {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #007acc;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .description {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Watch the Video</h1>
+    <div class="video-container">
+        <video controls>
+            <source src="{{ url_for('static', filename='motion_detection.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="description">
+        <h2>About the Motion Detection Model</h2>
+        <p>The video above demonstrates a <span class="highlight">motion detection model</span> designed to capture and identify movement within the camera's field of view. This model leverages computer vision techniques to identify moving objects and apply appropriate bounding boxes around areas of detected motion.</p>
+        <p>To achieve this, frames are analyzed in real-time, and movement patterns are distinguished from static backgrounds. The model is calibrated to differentiate various types of motion, allowing it to focus on meaningful activity and filter out noise. When significant motion is detected, it can log this information or trigger other actions, such as recording the specific moments.</p>
+        <p>By using this model, we can detect activity in real-time applications, which has practical uses in areas like <span class="highlight">security, traffic monitoring, and behavioral analysis</span>.</p>
+    </div>
+</body>
+</html>
