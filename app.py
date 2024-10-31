@@ -32,10 +32,10 @@
 
      
 from flask import Flask, render_template, request,jsonify
-import os
-import pickle 
-import cv2
-import numpy as np
+# import os
+# import pickle 
+# import cv2
+# import numpy as np
 from fastai.vision.all import *
 # from tensorflow.keras.models import load_model
 import base64
