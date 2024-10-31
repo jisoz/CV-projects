@@ -14,8 +14,9 @@ scikit-learn
 scipy
 
 opencv-python
-tensorflow
+tensorflow==2.16.1
 
 matplotlib==3.6.0
+
 
 torch
