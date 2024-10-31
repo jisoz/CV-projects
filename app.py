@@ -39,13 +39,18 @@ import numpy as np
 from fastai.vision.all import *
 from tensorflow.keras.models import load_model
 import base64
+from pathlib import Path
+import pathlib
 app = Flask(__name__)
 
+pathlib.WindowsPath = pathlib.PosixPath
+temp = pathlib.PosixPath
 # Define the path for the model
-path = os.getcwd()
-modelpath = os.path.join(path, 'fruit_classifier.pkl')
-emotion_modelpath = os.path.join(path, 'emotion_model.h5')  # Path for the emotion detection model
-
+# path = os.getcwd()
+# modelpath = os.path.join(path, 'fruit_classifier.pkl')
+# emotion_modelpath = os.path.join(path, 'emotion_model.h5')  # Path for the emotion detection model
+modelpath = Path('fruit_classifier.pkl')
+emotion_modelpath = Path('emotion_model.h5')
 model = load_learner(modelpath)
 
 emotion_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
